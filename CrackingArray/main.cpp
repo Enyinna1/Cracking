@@ -7,6 +7,8 @@
 //
 
 #include <iostream>
+#include <vector>
+#include <sstream>
 
 using namespace std;
 
@@ -21,12 +23,9 @@ int main(int argc, const char * argv[]) {
     //1 <= ai <= 10^6
     
     int n;
-    int rotate[6] = {1, 2, 3, 4, 5, 6};
     int d;
-    
-    for (int x = 0; x < 6; ++x){
-        cout << rotate[x] << endl;
-    }
+    string line1, line2, n1, d1;
+    vector<int>myArray;
     
     
     
@@ -34,11 +33,47 @@ int main(int argc, const char * argv[]) {
     
     cout << " Enter the n and d" << endl;
     
-    cin >> n;
-    cin >> d;
+    getline(cin, line1);
+    istringstream iss(line1);
+    iss >> n;
+    iss >> d;
+    cout << n << " " << d << endl;
+    int rotate[n];
     
-    cout << n << endl;
+    cout << " Enter array elements " << endl;
+    getline(cin, line2);
+    istringstream iss1(line2);
+        for(int result1 = 0; result1 < n; result1++){
+            iss1 >> rotate[result1];
+            cout << rotate[result1] << " ";
+    }
+    cout << endl;
+    int holdingArray[d];
+    int counter = 0;
+    int iter = 0;
     
-    cout << d << endl;
+    for(int x = 0; x < d; ++x){
+        
+        holdingArray[x] = rotate[x];
+    }
+
+    for(int z = 0; z < n; ++z) {
+        if(d >= n){
+            rotate[iter] = holdingArray[counter];
+            ++iter;
+            ++counter;
+        }
+        else{
+            rotate[iter] = rotate[d];
+            ++iter;
+            ++d;
+        }
+ 
+    }
+    
+    for(int y = 0; y < n; ++y){
+        
+        cout << rotate[y] << " ";
+    }
     return 0;
 }
